@@ -1,14 +1,19 @@
 /* CSS Variables for Theme Management */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
+  /* Light theme colors (modified for minimal, modern Tic Tac Toe) */
+  --bg-primary: #f9fbfc;
+  --bg-secondary: #ffffff;
   --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
+  --text-secondary: #424242;
+  --border-color: #e3e7ed;
+  --button-bg: #1976d2;
   --button-text: #ffffff;
+  --accent: #ffca28;
+  --primary: #1976d2;
+  --secondary: #424242;
+  --square-size: 80px; /* suitable for desktop, will scale */
 }
+
 
 [data-theme="dark"] {
   /* Dark theme colors */
@@ -100,5 +105,175 @@
     right: 10px;
     padding: 8px 16px;
     font-size: 12px;
+  }
+}
+
+/* ---- Tic Tac Toe App styles ---- */
+.tictactoe-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  background: var(--bg-primary);
+  padding: 0 10px;
+}
+
+.ttt-title {
+  font-size: 2.4rem;
+  font-weight: bold;
+  margin-bottom: 28px;
+  color: var(--primary);
+  letter-spacing: 0.06em;
+}
+
+.ttt-board {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  box-shadow: 0 2px 14px rgba(25, 118, 210, 0.06), 0 1.5px 4px rgba(66,66,66,0.07);
+  border-radius: 16px;
+  background: var(--bg-secondary);
+  border: 1.5px solid var(--border-color);
+  padding: 8px 20px 18px 20px;
+}
+
+.ttt-row {
+  display: flex;
+  gap: 0;
+}
+
+.ttt-square {
+  width: var(--square-size);
+  height: var(--square-size);
+  font-size: 2.3rem;
+  color: var(--primary);
+  background: var(--bg-secondary);
+  border: none;
+  border-bottom: 2.3px solid var(--border-color);
+  border-right: 2.3px solid var(--border-color);
+  transition: background 0.21s, color 0.14s;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  border-radius: 0;
+  user-select: none;
+}
+
+.ttt-square:last-child {
+  border-right: none;
+}
+.ttt-row:last-child .ttt-square {
+  border-bottom: none;
+}
+
+.ttt-square.x {
+  color: var(--primary);
+}
+.ttt-square.o {
+  color: var(--secondary);
+}
+.ttt-square.highlight {
+  background: var(--accent);
+  color: #233959;
+  font-weight: bold;
+  box-shadow: 0 0 7px 0px var(--accent), 0 1.5px 1.5px rgba(66,66,66,0.15);
+  z-index: 3;
+}
+.ttt-square:disabled {
+  background: var(--bg-primary);
+  opacity: 0.74;
+  cursor: not-allowed;
+}
+
+.ttt-statusbar {
+  min-height: 44px;
+  margin: 24px 0 14px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.status {
+  font-size: 1.16rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 4px 13px;
+  border-radius: 6px;
+  line-height: 1.44;
+}
+.status.turn .player-x {
+  color: var(--primary);
+  font-weight: bold;
+}
+.status.turn .player-o {
+  color: var(--secondary);
+  font-weight: bold;
+}
+.status.win.x {
+  background: var(--primary);
+  color: #fff;
+}
+.status.win.o {
+  background: var(--secondary);
+  color: #fff;
+}
+.status.draw {
+  background: var(--accent);
+  color: var(--text-primary);
+}
+
+/* Restart button styles */
+.restart-btn {
+  margin-top: 2px;
+  padding: 9px 30px;
+  font-size: 1.13rem;
+  font-weight: 500;
+  color: var(--button-text);
+  background: var(--primary);
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(25, 118, 210, 0.05);
+  letter-spacing: 0.04em;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: background 0.16s, transform 0.14s;
+  outline: none;
+  min-width: 144px;
+}
+.restart-btn:hover,
+.restart-btn:focus {
+  background: #1565c0;
+  transform: translateY(-2px) scale(1.02);
+}
+.restart-btn:active {
+  transform: scale(1.008);
+}
+
+.ttt-footer {
+  font-size: 0.97rem;
+  color: #abb7c4;
+  margin-top: 24px;
+  margin-bottom: 3px;
+  letter-spacing: 0.02em;
+  opacity: 0.77;
+  text-align: center;
+  font-family: inherit;
+}
+
+/* Small devices: board + square adjustments */
+@media (max-width: 600px) {
+  :root {
+    --square-size: 54px;
+  }
+  .ttt-title {
+    font-size: 1.5rem;
+  }
+  .ttt-board {
+    padding: 2px 5px 8px 5px;
   }
 }
